@@ -1,5 +1,6 @@
 import * as THREE from 'https://unpkg.com/three@0.126.0/build/three.module.js';
-import { TrackballControls } from 'https://unpkg.com/three@0.126.0/examples/jsm/controls/TrackballControls.js';
+import { DragControls } from 'https://unpkg.com/three@0.126.0/examples/jsm/controls/DragControls.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.126.0/examples/jsm/controls/OrbitControls.js';
 
 let horizontalCoords = 0;
 
@@ -19,6 +20,7 @@ function createTree(x, y) {
 	const leafMesh = new THREE.Mesh(leafGeometry, leafMaterial);
 	leafMesh.position.z = 7;
 	treeObject.add(leafMesh);
+	objects.push(treeObject);
 }
 
 const renderer = new THREE.WebGLRenderer();
@@ -68,6 +70,8 @@ const landMesh = new THREE.Mesh(landGeometry, landMaterial);
 landMesh.position.z = 0;
 scene.add(landMesh);
 
+objects.push(humanObject);
+
 // create tree
 const treePosition = [[5, 9], [-20, 30], [15, -15], [17, -8], [-9, -23]];
 treePosition.forEach(([x, y]) => {
@@ -76,7 +80,12 @@ treePosition.forEach(([x, y]) => {
 
 camera.position.z = 20;
 
-const controls = new TrackballControls(camera, renderer.domElement);
+objects.forEach((obj) => {
+	console.log(obj.name);
+});
+
+const drag = new DragControls(objects, camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 
 const animate = () => {
 	// human control: WASD
@@ -100,6 +109,16 @@ const animate = () => {
 			humanObject.rotation.z += 0.01;
 			horizontalCoords -= 0.01;
 		}
+
+		const hour = new Date().getHours();
+
+		if (hour >= 6 && hour < 12) {
+	    	scene.background = new THREE.Color(0x2e4482);
+		} else if (hour >= 12 && hour < 19) {
+	    	scene.background = new THREE.Color(0x546bab);
+		} else {
+	    	scene.background = new THREE.Color(0x2e4482);
+	  }
 	});
 
 	controls.update();
