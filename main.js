@@ -80,4 +80,36 @@ const animate = () => {
 	renderer.render(scene, camera);
 };
 
+const addObjectForm = document.querySelector("form");
+
+addObjectForm.addEventListener("submit", (event) => {
+	event.preventDefault();
+
+	const [name, size, x, y] = [
+		event.target.object.value,
+		event.target.size.value,
+		event.target.x.value,
+		event.target.y.value
+	];
+
+	switch (name) {
+		case "tree":
+			const tree = createObject.createTree(x, y);
+			scene.add(tree);
+			objects.push(tree);
+			break;
+
+		default:
+			return;
+	}
+
+	[
+		event.target.object.value,
+		event.target.size.value,
+		event.target.x.value,
+		event.target.y.value
+	] = ["", 0, 0, 0];
+});
+
 animate();
+

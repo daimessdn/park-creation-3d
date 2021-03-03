@@ -11,3 +11,23 @@ html, body {
 	color: white;
 	z-index: 10;
 }
+
+form {
+	position: fixed;
+	bottom: 8px;
+	left: 8px;
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	padding: 2px;
+}
+
+form input, form button, form select {
+	background-color: lightgreen;
+	color: #fff;
+}
+
+form * {
+	margin: 2px;
+	font-size: 12px;
+}

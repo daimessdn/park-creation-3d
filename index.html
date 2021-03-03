@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8" />
 	<title>CREATION PARK</title>
 	<link rel="stylesheet" href="main.css" />
 </head>
 <body>
 	<div id="helper">Control WASD to navigate the human.</div>
+
+	<form>
+		<label for="object">Select object to add</label>
+		<select name="object" value="">
+			<option value="">select object</option>
+			<option value="mountain">mountain</option>
+			<option value="tree">tree</option>
+			<option value="flowerbush">flowerbush</option>
+		</select>
+
+		<label for="size">Size</label>
+		<input type="number" name="size" placeholder="type number">
+
+		<label for="x">position X</label>
+		<input type="number" name="x" placeholder="type x">
+		
+		<label for="y">position Y</label>
+		<input type="number" name="y" placeholder="type y">
+
+		<button type="submit">add object</button>
+	</form>
+
 	<div id="main-3d"></div>
 
 	<script type="module" src="main.js"></script>
