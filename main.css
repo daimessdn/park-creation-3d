@@ -22,10 +22,10 @@ form {
 	padding: 2px;
 }
 
-form input, form button, form select {
+/*form input, form button, form select {
 	background-color: lightgreen;
 	color: #fff;
-}
+}*/
 
 form * {
 	margin: 2px;

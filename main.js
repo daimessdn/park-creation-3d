@@ -10,48 +10,55 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.querySelector("#main-3d").appendChild( renderer.domElement );
 
-const raycaster = new THREE.Raycaster();
+function resizeRendererToDisplaySize(renderer) {
+  const canvas = renderer.domElement;
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  const needResize = canvas.width !== width || canvas.height !== height;
+  if (needResize) {
+    renderer.setSize(width, height, false);
+  }
+  return needResize;
+}
 
-console.log(performance.now())
+// const raycaster = new THREE.Raycaster();
+
+// console.log(performance.now())
+
+// init'd LocalStorage key
+const OBJECT_LOCAL_KEY = "park3d.objects";
+
+// init'd objects from localStorage
+if (!localStorage.getItem(OBJECT_LOCAL_KEY)) {
+	localStorage.setItem(OBJECT_LOCAL_KEY, "[]")
+}
+
+const objects = JSON.parse(localStorage.getItem(OBJECT_LOCAL_KEY));
 
 // create scene and camera
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-// init'd empty objects
-const objects = [];
-
-const human = createObject.createHumanObject();
-scene.add(human);
-objects.push(human);
-
 const land = createObject.createLand();
 scene.add(land);
-// objects.push(land);
+objects.push(land);
 
-const geometry = new THREE.ConeGeometry( 5, 20, 32 );
-const material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-const cone = new THREE.Mesh( geometry, material );
-scene.add( cone );
-
-// create tree
-const treePosition = [[5, 9], [-20, 30], [15, -15], [17, -8], [-9, -23]];
-treePosition.forEach(([x, y]) => {
-	const tree = createObject.createTree(x, y);
-	scene.add(tree);
-	objects.push(tree);
-});
-
-camera.position.z = 100;
+camera.position.z = 200;
+camera.position.y = -5;
 
 objects.forEach((obj) => {
 	console.log(obj.name);
 });
 
-const drag = new DragControls(objects, camera, renderer.domElement);
+// const drag = new DragControls(objects, camera, renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 
 const animate = () => {
+	  if (resizeRendererToDisplaySize(renderer)) {
+	    const canvas = renderer.domElement;
+	    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+	    camera.updateProjectionMatrix();
+	  }
 	// human control: WASD
 	document.addEventListener("keydown", (event) => {
 		if (event.key === "w" || event.key === "ArrowUp") {
@@ -99,16 +106,26 @@ addObjectForm.addEventListener("submit", (event) => {
 			objects.push(tree);
 			break;
 
+		case "mountain":
+			const mountain1 = createObject.createMountain(x, y);
+			scene.add(mountain1);
+			objects.push(mountain1);
+			break;
+
+		case "human":
+			const human = createObject.createHumanObject();
+			scene.add(human);
+			objects.push(human);
+			break;
+
 		default:
 			return;
 	}
 
-	[
-		event.target.object.value,
-		event.target.size.value,
-		event.target.x.value,
-		event.target.y.value
-	] = ["", 0, 0, 0];
+	localStorage.setItem(OBJECT_LOCAL_KEY, JSON.stringify(objects));
+
+	[ event.target.object.value, event.target.size.value,
+		event.target.x.value, event.target.y.value ] = ["", 0, 0, 0];
 });
 
 animate();

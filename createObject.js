@@ -2,6 +2,10 @@ import * as THREE from 'https://unpkg.com/three@0.126.0/build/three.module.js';
 
 const raycaster = new THREE.Raycaster();
 
+function generateTime() {
+	return new Date().getTime();
+}
+
 function createTree(x, y) {
 	const stemGeometry = new THREE.BoxGeometry(1, 1, 5);
 	const stemMaterial = new THREE.MeshPhongMaterial({ emissive: 0x964B00 });
@@ -18,7 +22,7 @@ function createTree(x, y) {
 	leafMesh.position.z = 7;
 	treeObject.add(leafMesh);
 
-	treeObject.name = "tree";
+	treeObject.name = "tree" + generateTime();
 
 	return treeObject;
 }
@@ -50,22 +54,35 @@ function createHumanObject() {
 	headMesh.position.z = 3;
 	humanObject.add(headMesh);
 
-	humanObject.name = "human";
+	humanObject.name = "human" + generateTime();
 
 	return humanObject;
 }
 
+const createMountain = (x, y) => {
+	const mountain1Geometry = new THREE.ConeGeometry( 20, 20, 8 );
+	const mountain1Material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+	const mountain = new THREE.Mesh(mountain1Geometry, mountain1Material);
+	mountain.position.set(33, 33, 0);
+	mountain.rotation.x = Math.PI / 2;
+
+	mouuntain.name = "mountain" + generateTime();
+
+	return mountain;
+}
+
 const createLand = function() {
 	// create land surface
-	const landGeometry = new THREE.PlaneGeometry(100, 100);
+	const landGeometry = new THREE.BoxGeometry(200, 200, 5);
 	const landMaterial = new THREE.MeshPhongMaterial( { emissive: 0x004d00 } );
 
 	const landMesh = new THREE.Mesh(landGeometry, landMaterial);
-	landMesh.position.z = 0;
+	landMesh.position.z = -5;
 
-	landMesh.name = "land";
+	landMesh.name = "land" + generateTime();
 
 	return landMesh;
 }
 
-export default { createTree, createHumanObject, createLand };
+
+export default { createTree, createHumanObject, createLand, createMountain };
