@@ -16,7 +16,7 @@ header {
 
 	color: #fff;
 
-	background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("demo.gif");
+	background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("../img/demo.gif");
 	background-size: cover;
 	background-position: center center;
 }
@@ -62,7 +62,7 @@ p > a {
 	z-index: 10;
 }
 
-form {
+#left-sidebar {
 	position: fixed;
 	bottom: 8px;
 	left: 8px;
@@ -70,6 +70,11 @@ form {
 	flex-direction: column;
 	background-color: #fff;
 	padding: 2px;
+}
+
+form {
+	display: inline-flex;
+	flex-direction: column;
 }
 
 form * {

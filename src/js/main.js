@@ -11,28 +11,28 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 document.querySelector("#main-3d").appendChild( renderer.domElement );
 
 function resizeRendererToDisplaySize(renderer) {
-  const canvas = renderer.domElement;
-  const width = canvas.clientWidth;
-  const height = canvas.clientHeight;
-  const needResize = canvas.width !== width || canvas.height !== height;
-  if (needResize) {
-    renderer.setSize(width, height, false);
-  }
-  return needResize;
+	const canvas = renderer.domElement;
+	const width = canvas.clientWidth;
+	const height = canvas.clientHeight;
+	const needResize = canvas.width !== width || canvas.height !== height;
+	if (needResize) {
+		renderer.setSize(width, height, false);
+	}
+	return needResize;
 }
 
 const getTimeScenery = (time) => {
 	if (time >= 6 && time < 12) {
-    	scene.background = new THREE.Color(0x2e4482);
+			scene.background = new THREE.Color(0x2e4482);
 			spotLight.position.set(105, 105, 10);
 	} else if (time >= 12 && time < 18) {
-    	scene.background = new THREE.Color(0x546bab);
+			scene.background = new THREE.Color(0x546bab);
 			spotLight.position.set(0, 0, 100);
 			spotLight.intensity = .25;
 	} else {
-    	scene.background = new THREE.Color(0x2e4482);
+			scene.background = new THREE.Color(0x2e4482);
 			spotLight.position.set(0, 0, 0);
-  }
+	}
 }
 
 // init'd LocalStorage key
@@ -76,12 +76,14 @@ scene.add(spotLight);
 
 getTimeScenery(new Date().getHours());
 
-const animate = () => {
-	  if (resizeRendererToDisplaySize(renderer)) {
-	    const canvas = renderer.domElement;
-	    camera.aspect = canvas.clientWidth / canvas.clientHeight;
-	    camera.updateProjectionMatrix();
-	  }
+const animate = (time) => {
+	time *= 0.001;
+
+	if (resizeRendererToDisplaySize(renderer)) {
+		const canvas = renderer.domElement;
+		camera.aspect = canvas.clientWidth / canvas.clientHeight;
+		camera.updateProjectionMatrix();
+	}
 
 	// human control: WASD
 	document.addEventListener("keydown", (event) => {
@@ -93,7 +95,7 @@ const animate = () => {
 			human.position.y -= 0.001;
 		} else if (event.key === "d" || event.key === "ArrowRight") {
 			human.position.x += 0.001;
-		}		
+		}   
 	});
 
 	getTimeScenery(new Date().getHours());
@@ -132,6 +134,11 @@ function generateObject({name, x, y}) {
 			scene.add(tree);
 			break;
 
+		case "tree2":
+			const tree2 = createObject.createTree2(x, y);
+			scene.add(tree2);
+			break;
+
 		case "mountain":
 			const mountain1 = createObject.createMountain(x, y);
 			scene.add(mountain1);
@@ -156,3 +163,24 @@ function generateObject({name, x, y}) {
 			return;
 	}
 }
+
+// const canvas = renderer.domElement;
+
+// const elem = document.querySelector('#takeScreenshot');
+// elem.addEventListener('click', () => {
+// 	canvas.toBlob((blob) => {
+// 		saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
+// 	});
+// });
+ 
+// const saveBlob = (function() {
+// 	const a = document.createElement('a');
+// 	document.body.appendChild(a);
+// 	a.style.display = 'none';
+// 	return function saveData(blob, fileName) {
+// 		const url = window.URL.createObjectURL(blob);
+// 		a.href = url;
+// 		a.download = fileName;
+// 		a.click();
+// 	};
+// }());
