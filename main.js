@@ -1,6 +1,6 @@
 import * as THREE from 'https://unpkg.com/three@0.126.0/build/three.module.js';
 import { DragControls } from 'https://unpkg.com/three@0.126.0/examples/jsm/controls/DragControls.js';
-import { OrbitControls } from 'https://unpkg.com/three@0.126.0/examples/jsm/controls/OrbitControls.js';
+import { TrackballControls } from 'https://unpkg.com/three@0.126.0/examples/jsm/controls/TrackballControls.js';
 
 import createObject from "./createObject.js";
 
@@ -43,6 +43,10 @@ if (!localStorage.getItem(OBJECT_LOCAL_KEY)) {
 	localStorage.setItem(OBJECT_LOCAL_KEY, "[]")
 }
 
+let objects = JSON.parse(localStorage.getItem(OBJECT_LOCAL_KEY));
+
+console.log(objects);
+
 // create scene and camera
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -53,10 +57,8 @@ scene.add(land);
 const human = createObject.createHumanObject();
 scene.add(human);
 
-let objects = JSON.parse(localStorage.getItem(OBJECT_LOCAL_KEY));
-
-var axes = new THREE.AxesHelper(20);
-scene.add(axes);
+// var axes = new THREE.AxesHelper(20);
+// scene.add(axes);
 
 camera.position.z = 200;
 camera.position.y = -5;
@@ -66,7 +68,7 @@ objects.forEach((obj) => {
 });
 
 // const drag = new DragControls(objects, camera, renderer.domElement);
-const controls = new OrbitControls(camera, renderer.domElement);
+const controls = new TrackballControls(camera, renderer.domElement);
 
 const spotLight = new THREE.SpotLight(0xf5c77f);
 spotLight.castShadow = true;
@@ -84,13 +86,13 @@ const animate = () => {
 	// human control: WASD
 	document.addEventListener("keydown", (event) => {
 		if (event.key === "w" || event.key === "ArrowUp") {
-			human.position.y += 0.01;
+			human.position.y += 0.001;
 		} else if (event.key === "a" || event.key === "ArrowLeft") {
-			human.position.x -= 0.01;
+			human.position.x -= 0.001;
 		} else if (event.key === "s" || event.key === "ArrowDown") {
-			human.position.y -= 0.01;
+			human.position.y -= 0.001;
 		} else if (event.key === "d" || event.key === "ArrowRight") {
-			human.position.x += 0.01;
+			human.position.x += 0.001;
 		}		
 	});
 
@@ -108,7 +110,6 @@ addObjectFromForm.addEventListener("submit", (event) => {
 
 	const object = {
 		name: event.target.object.value,
-		size: event.target.size.value,
 		x: event.target.x.value,
 		y: event.target.y.value
 	};
@@ -118,13 +119,13 @@ addObjectFromForm.addEventListener("submit", (event) => {
 
 	localStorage.setItem(OBJECT_LOCAL_KEY, JSON.stringify(objects));
 
-	[ event.target.object.value, event.target.size.value,
-		event.target.x.value, event.target.y.value ] = ["", 0, 0, 0];
+	[ event.target.object.value,
+		event.target.x.value, event.target.y.value ] = ["", 0, 0];
 });
 
 animate();
 
-function generateObject({name, size, x, y}) {
+function generateObject({name, x, y}) {
 	switch (name) {
 		case "tree":
 			const tree = createObject.createTree(x, y);
