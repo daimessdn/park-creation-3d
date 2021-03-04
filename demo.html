@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Create your own park!</title>
+	<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+	<div id="helper">
+		Let's create your own park!<br />
+		Add some objects such as trees, mountains, etc.<br />
+		Drag, scroll to zoom and move the camera.<br />
+		You can also control WASD to navigate the human.
+
+		<br />
+
+		<button onclick="this.parentElement.style.display = 'none';">Close this helper.</button>
+	</div>
+
+	<form>
+		<label for="object">Select object to add</label>
+		<select name="object" value="">
+			<option value="">select object</option>
+			<option value="mountain">mountain</option>
+			<option value="mountain2">mountain2</option>
+			<option value="mountain3">mountain3</option>
+			<option value="tree">tree</option>
+		</select>
+
+		<label for="x">position X</label>
+		<input type="number" name="x" placeholder="type x">
+		
+		<label for="y">position Y</label>
+		<input type="number" name="y" placeholder="type y">
+
+		<button type="submit">add object</button>
+	</form>
+
+	<div id="main-3d"></div>
+
+	<script type="module" src="main.demo.js"></script>
+</body>
+</html>
