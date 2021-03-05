@@ -6,6 +6,7 @@
 - Add object on your own (such as trees, mountains, etc.).
 - Control human using <kbd>W</kbd>, <kbd>A</kbd>, <kbd>S</kbd>, <kbd>D</kbd>
 - You can also save your snapshot screenshot by clicking **Screenshot** button.
+- Your 3D park progress saved on local storage (will not work on [demo](https://daimessdn.github.io/park-creation-3d/demo))
 
 ## Language feature(s)
 - HTML, CSS, and Vanilla JavaScript
