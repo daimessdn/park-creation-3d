@@ -126,8 +126,6 @@ addObjectFromForm.addEventListener("submit", (event) => {
 	generateObject(object);
 	objects.push(object);
 
-	localStorage.setItem(OBJECT_LOCAL_KEY, JSON.stringify(objects));
-
 	[ event.target.object.value,
 		event.target.x.value, event.target.y.value ] = ["", 0, 0];
 });
@@ -159,6 +157,11 @@ function generateObject({name, x, y}) {
 		case "human":
 			const human = createObject.createHumanObject();
 			scene.add(human);
+			break;
+
+		case "tree2":
+			const tree2 = createObject.createTree2(x, y);
+			scene.add(tree2);
 			break;
 
 		default:
