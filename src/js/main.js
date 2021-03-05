@@ -13,7 +13,7 @@ let prevTime = performance.now();
 raycaster = new THREE.Raycaster();
 mouse = new THREE.Vector2();
 
-renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.querySelector("#main-3d").appendChild( renderer.domElement );
 

@@ -6,7 +6,7 @@ import createObject from "./createObject.js";
 
 let horizontalCoords = 0;
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.querySelector("#main-3d").appendChild( renderer.domElement );
 
@@ -184,3 +184,24 @@ function onWindowResize() {
 
 	animate();
 }
+
+const canvas = renderer.domElement;
+
+const elem = document.querySelector('#takeScreenshot');
+elem.addEventListener('click', () => {
+	canvas.toBlob((blob) => {
+		saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
+	});
+});
+ 
+const saveBlob = (function() {
+	const a = document.createElement('a');
+	document.body.appendChild(a);
+	a.style.display = 'none';
+	return function saveData(blob, fileName) {
+		const url = window.URL.createObjectURL(blob);
+		a.href = url;
+		a.download = fileName;
+		a.click();
+	};
+}());
