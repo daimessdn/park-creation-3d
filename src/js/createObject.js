@@ -8,12 +8,12 @@ function generateTime() {
 
 function createTree(x, y) {
 	const stemGeometry = new THREE.BoxGeometry(1, 1, 5);
-	const stemMaterial = new THREE.MeshPhongMaterial({ emissive: 0x964B00 });
+	const stemMaterial = new THREE.MeshPhongMaterial({ color: 0x00000, emissive: 0x964B00 });
 
 	const leafGeometry = new THREE.TetrahedronGeometry(5, 2);
-	const leafMaterial = new THREE.MeshPhongMaterial({ emissive: 0x00ff00 });
+	const leafMaterial = new THREE.MeshPhongMaterial({ color: 0x00000, emissive: 0x00ff00 });
 
-	const treeObject = new THREE.Object3D();
+	const treeObject = new THREE.Group();
 	treeObject.position.set(x, y, 2);
 
 	const stemMesh = new THREE.Mesh(stemGeometry, stemMaterial);
@@ -31,12 +31,12 @@ function createTree(x, y) {
 
 function createTree2(x, y) {
 	const stemGeometry2 = new THREE.BoxGeometry(1, 1, 5);
-	const stemMaterial2 = new THREE.MeshPhongMaterial({ emissive: 0x964B00 });
+	const stemMaterial2 = new THREE.MeshPhongMaterial({ color: 0x00000, emissive: 0x964B00 });
 
 	const leafGeometry2 = new THREE.TetrahedronGeometry(5, 2);
-	const leafMaterial2 = new THREE.MeshPhongMaterial({ emissive: 0xba1552 });
+	const leafMaterial2 = new THREE.MeshPhongMaterial({ color: 0x00000, emissive: 0xba1552 });
 
-	const treeObject2 = new THREE.Object3D();
+	const treeObject2 = new THREE.Group();
 	treeObject2.position.set(x, y, 2);
 
 	const stemMesh2 = new THREE.Mesh(stemGeometry2, stemMaterial2);
@@ -53,8 +53,8 @@ function createTree2(x, y) {
 }
 
 function createHumanObject() {
-	// create human object3d
-	const humanObject = new THREE.Object3D();
+	// create human Group
+	const humanObject = new THREE.Group();
 
 	// create pointer
 	const pointerGeometry = new THREE.PlaneGeometry(1, 2);
@@ -66,11 +66,11 @@ function createHumanObject() {
 
 	// create box geometry for body
 	const geometry = new THREE.BoxGeometry(2, 2, 4);
-	const greenMaterial = new THREE.MeshPhongMaterial({ emissive: 0xf5c77f });
+	const greenMaterial = new THREE.MeshPhongMaterial({ color: 0x00000, emissive: 0xf5c77f });
 
 	// circle body for head
 	const circle = new THREE.SphereGeometry(1);
-	const skinMaterial = new THREE.MeshPhongMaterial({ emissive: 0x964B00 });
+	const skinMaterial = new THREE.MeshPhongMaterial({ color: 0x00000, emissive: 0x964B00 });
 	
 	const cube = new THREE.Mesh(geometry, greenMaterial);
 	humanObject.position.z = 2;
@@ -87,7 +87,7 @@ function createHumanObject() {
 
 const createMountain = (x, y) => {
 	const mountain1Geometry = new THREE.ConeGeometry( 20, 20, 8 );
-	const mountain1Material = new THREE.MeshPhongMaterial( {emissive: 0xa3cfe9} );
+	const mountain1Material = new THREE.MeshPhongMaterial( {color: 0x00000, emissive: 0xa3cfe9} );
 	const mountain = new THREE.Mesh(mountain1Geometry, mountain1Material);
 	mountain.position.set(x, y, 5);
 	mountain.rotation.x = Math.PI / 2;
@@ -100,7 +100,7 @@ const createMountain = (x, y) => {
 
 const createMountain2 = (x, y) => {
 	const mountain2Geometry = new THREE.ConeGeometry( 20, 40, 20 );
-	const mountain2Material = new THREE.MeshPhongMaterial( {emissive: 0x013a89} );
+	const mountain2Material = new THREE.MeshPhongMaterial( {color: 0x00000, emissive: 0x013a89} );
 	const mountain2 = new THREE.Mesh(mountain2Geometry, mountain2Material);
 	mountain2.position.set(x, y, 18);
 	mountain2.rotation.x = Math.PI / 2;
@@ -113,7 +113,7 @@ const createMountain2 = (x, y) => {
 
 const createMountain3 = (x, y) => {
 	const mountain3Geometry = new THREE.ConeGeometry( 10, 30, 15 );
-	const mountain3Material = new THREE.MeshPhongMaterial( {emissive: 0x6098d1} );
+	const mountain3Material = new THREE.MeshPhongMaterial( {color: 0x00000, emissive: 0x6098d1} );
 	const mountain3 = new THREE.Mesh(mountain3Geometry, mountain3Material);
 	mountain3.position.set(x, y, 13);
 	mountain3.rotation.x = Math.PI / 2;
@@ -127,7 +127,7 @@ const createMountain3 = (x, y) => {
 const createLand = function() {
 	// create land surface
 	const landGeometry = new THREE.BoxGeometry(200, 200, 5);
-	const landMaterial = new THREE.MeshPhongMaterial( { emissive: 0x7cfc00 } );
+	const landMaterial = new THREE.MeshPhongMaterial( { color: 0x00000, emissive: 0x7cfc00 } );
 
 	const landMesh = new THREE.Mesh(landGeometry, landMaterial);
 	landMesh.position.z = -5;
