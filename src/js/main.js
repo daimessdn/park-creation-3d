@@ -151,6 +151,11 @@ function generateObject({name, x, y}) {
 			renderedObjects.push(tree2);
 			break;
 
+		case "tree3":
+			const tree3 = createObject.createTree3(x, y);
+			scene.add(tree3);
+			break;
+
 		case "mountain":
 			const mountain1 = createObject.createMountain(x, y);
 			scene.add(mountain1);

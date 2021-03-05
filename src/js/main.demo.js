@@ -164,6 +164,11 @@ function generateObject({name, x, y}) {
 			scene.add(tree2);
 			break;
 
+		case "tree3":
+			const tree3 = createObject.createTree3(x, y);
+			scene.add(tree3);
+			break;
+
 		default:
 			return;
 	}

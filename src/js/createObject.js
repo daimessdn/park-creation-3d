@@ -52,6 +52,29 @@ function createTree2(x, y) {
 	return treeObject2;
 }
 
+function createTree3(x, y) {
+	const stemGeometry3 = new THREE.BoxGeometry(1, 1, 5);
+	const stemMaterial3 = new THREE.MeshPhongMaterial({ color: 0x00000, emissive: 0x964B00 });
+
+	const leafGeometry3 = new THREE.TetrahedronGeometry(5, 2);
+	const leafMaterial3 = new THREE.MeshPhongMaterial({ color: 0x00000, emissive: 0xf56b10 });
+
+	const treeObject3 = new THREE.Group();
+	treeObject3.position.set(x, y, 2);
+
+	const stemMesh2 = new THREE.Mesh(stemGeometry3, stemMaterial3);
+	treeObject3.add(stemMesh2);
+	const leafMesh2 = new THREE.Mesh(leafGeometry3, leafMaterial3);
+	leafMesh2.position.z = 7;
+	treeObject3.add(leafMesh2);
+
+	treeObject3.name = "tree2" + generateTime();
+
+	treeObject3.castShadow = true;
+
+	return treeObject3;
+}
+
 function createHumanObject() {
 	// create human Group
 	const humanObject = new THREE.Group();
@@ -138,6 +161,6 @@ const createLand = function() {
 }
 
 
-export default { createTree, createTree2,
+export default { createTree, createTree2, createTree3,
 	             createHumanObject, createLand,
 	             createMountain, createMountain2, createMountain3 };
