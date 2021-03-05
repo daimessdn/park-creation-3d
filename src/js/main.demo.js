@@ -132,6 +132,8 @@ addObjectFromForm.addEventListener("submit", (event) => {
 
 animate();
 
+window.addEventListener("resize", onWindowResize);
+
 function generateObject({name, x, y}) {
 	switch (name) {
 		case "tree":
@@ -172,4 +174,13 @@ function generateObject({name, x, y}) {
 		default:
 			return;
 	}
+}
+
+function onWindowResize() {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	animate();
 }
