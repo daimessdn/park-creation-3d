@@ -27,14 +27,14 @@ if (!localStorage.getItem(OBJECT_LOCAL_KEY)) {
 
 const getTimeScenery = (time) => {
 	if (time >= 6 && time < 12) {
-			scene.background = new THREE.Color(0x2e4482);
+			scene.background = new THREE.Color(0x5f6f9c);
 			spotLight.position.set(105, 105, 10);
 	} else if (time >= 12 && time < 18) {
-			scene.background = new THREE.Color(0x546bab);
+			scene.background = new THREE.Color(0xf7efa5);
 			spotLight.position.set(0, 0, 100);
 			spotLight.intensity = .25;
 	} else {
-			scene.background = new THREE.Color(0x2e4482);
+			scene.background = new THREE.Color(0x001042);
 			spotLight.position.set(0, 0, 0);
 	}
 }
