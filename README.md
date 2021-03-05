@@ -12,3 +12,7 @@
 
 ## DEMO
 [daimessdn.github.io/park-creation-3d](https://daimessdn.github.io/park-creation-3d)
+
+![screenshot 1](screenshots/screencapture-1391x777.png)
+![screenshot 2](screenshots/screencapture-1391x777-1.png)
+![screenshot 3](screenshots/screencapture-1391x777-2.png)
